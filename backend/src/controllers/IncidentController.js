@@ -1,4 +1,4 @@
-const connection = require('../database¹connection');
+const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
