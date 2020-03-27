@@ -1,10 +1,10 @@
-const conection = require('.../database/connection');
+const connection = require('../database/connection');
 
 module.exports = {
     async create(request, response) {
         const { id } = request.body;
 
-        const ong = await RTCPeerConnection('ongs')
+        const ong = await Connection('ongs')
             .where('id', id)
             .select('name')
             .first();
@@ -15,4 +15,4 @@ module.exports = {
 
         return response.json(ong);
     }
-}
+};

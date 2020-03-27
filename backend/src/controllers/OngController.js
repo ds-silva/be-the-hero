@@ -3,17 +3,8 @@ const crypto = require('crypto');
 
 module.exports = {
     async index(request, response) {
-        const { page = 1 } = request.query;
+        const ongs = await connection('ongs').select('*');
 
-        const [count] = await connection('incidents').count();
-
-        const ongs = await connection('ongs')
-        .join('ongs', 'ongs_id', '=', 'incidents.ong_id')
-        .limit(5)
-        .offset(page - 1 * 5)
-        .select(['incidents.*', 'ong.name', 'ongs.email', 'ongs.whatsapp', 'ongs.city', 'ongs.uf']);
-    
-        response.header('X-Total-Count', count['count(*)']);
         return response.json(ongs);
     },
 
@@ -32,4 +23,4 @@ module.exports = {
 
         return response.json({ id })
     }
-}
+};
